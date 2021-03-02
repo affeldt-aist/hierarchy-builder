@@ -291,13 +291,16 @@ Elpi Export HB.mixin.
   - [StructureName.sort params] the first projection of the previous structure,
   - [StructureName.clone params T cT] a legacy repackaging function that eta expands
     the canonical [StructureName.type] of [T], using [cT] if provided.
-  - [StructureName.class sT : StructureName sT] outputs the class of [sT : StructureName.type params],
-  - [StructureName.of T : StructureName sT] outputs the class of the canonical [StructureName.type] of [T].
+  - [StructureName.class sT : StructureName sT] projects out the class of [sT : StructureName.type params],
+  - [StructureName.of T : StructureName sT] infers the class of the canonical [StructureName.type] of [T].
   - [StructureName.Build T cT : StructureName T] outputs the class of the canonical,
     and [StructureName.type] of [cT], and give it the type [Structure]. So that it is
     ready to use in combination with HB.instance, as in
     <<
+    (* not sure I get this use case *)
     HB.instance Definition _ := StructureName.Build T cT.
+    (* cloning a structure *)
+    HB.instance Definition _ := StructureName.Build T' (StructureName.of T).
     >>
 
   Disclaimer: any function other that the ones described above, including pattern matching
