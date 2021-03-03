@@ -154,6 +154,8 @@ pred builder-decl o:builder.
 
 pred module-to-export o:modpath.
 
+pred compress o:term, o:term.
+
 }}.
 
 (* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% *)
