@@ -120,8 +120,13 @@ mixin-for T M MICompressed :- mixin-src T M Tm, !, std.do! [
   ),
 
   if-verbose (coq.say "HB: Trying to compress mixin for" {coq.term->string MI}),
-  (pi X Y\ copy X Y :- compress X Y, !) => copy MI MICompressed,
+  std.spy(compress-coercion-paths MI MICompressed),
 ].
+
+pred compress-coercion-paths i:term, o:term.
+compress-coercion-paths MI MICompressed :-
+  (pi X Y\ copy X Y :- compress X Y, !) => copy MI MICompressed, !.
+
 
 pred mixin-for_mixin-builder i:prop, o:term.
 mixin-for_mixin-builder (mixin-for _ _ B) B.
