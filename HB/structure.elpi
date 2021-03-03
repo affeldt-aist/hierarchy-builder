@@ -319,7 +319,7 @@ declare-coercion SortProjection ClassProjection
   std.map AllTgtSuper class_structure AllTgtSuperStructures,
 
   mk-compression-clauses StructureF StructureT AllTgtSuperStructures AllCompressionClauses,
-  std.forall AllCompressionClauses (c\ log.coq.env.accumulate current "hb.db" (clause _ _ c)),
+  std.forall AllCompressionClauses (c\ log.coq.env.accumulate current "hb.db" (clause _ (before "compress:begin") c)),
 ].
 
 
@@ -341,7 +341,8 @@ mk-compression-clauses StructureF StructureT [StructureE|Rest] [Clause|Clauses]:
 
 pred mk-compression-clause i:list term, i:term, o:prop.
 mk-compression-clause [] (fun _ _ x\ app[_,_,LHS x,RHS x]) (pi x\ C x) :-
-  pi x\ copy (LHS x) (L x), copy (RHS x) (R x), C x = (pi tmp\ compress (L x) tmp :- !, copy (R x) tmp, !).
+  %pi x\ copy (LHS x) (L x), copy (RHS x) (R x), C x = (pi tmp\ compress (L x) (R tmp) :- !, compress x tmp, !).
+  pi x\ copy (LHS x) (L x), copy (RHS x) (R x), C x = (pi tmp\ compress (L x) (R x)).
 mk-compression-clause [UV|Rest] T (pi v\ R v) :-
   pi v\ (pi U\ copy U v :- same_var U UV, !) => mk-compression-clause Rest T (R v).
 
