@@ -120,7 +120,8 @@ mixin-for T M MICompressed :- mixin-src T M Tm, !, std.do! [
   ),
 
   if-verbose (coq.say "HB: Trying to compress mixin for" {coq.term->string MI}),
-  compress-coercion-paths MI MICompressed,
+  % compress-coercion-paths MI MICompressed,
+  MI = MICompressed
 ].
 
 pred compress-coercion-paths i:term, o:term.
