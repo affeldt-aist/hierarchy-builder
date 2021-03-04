@@ -154,6 +154,7 @@ pred builder-decl o:builder.
 
 pred module-to-export o:modpath.
 
+:index (4)
 pred compress o:term, o:term.
 :name "compress:begin"
 compress (app L) (app L1) :- !, std.map L compress L1.
